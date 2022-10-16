@@ -40,6 +40,18 @@ public class Client {
 			String request = "SESSION_UPDATE_REQUEST" + " " + args[2];
 			
 			out.println(request);
+			
+			String msg;
+			
+			msg = in.readLine();
+			
+			ligacao.close();
+			System.out.println("Terminou a ligacao!");
+		} catch (IOException e) {
+			System.out.println("Erro ao comunicar com o servidor: "+e);
+			System.exit(1);
+		}
+		
 		}
 		
 	}
