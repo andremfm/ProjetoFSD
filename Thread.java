@@ -32,6 +32,38 @@ public class Thread extends Thread {
 
 			StringTokenizer tokens = new StringTokenizer(msg);
 			String metodo = tokens.nextToken();
+
+			if (metodo.equals("SESSION_UPDATE_REQUEST")) {
+				response = "SESSION_UPDATE\n";
+				String users = tokens.nextToken();
+
+				//Criar metodo getUsers
+				Vector<String> userList = messages.getUsers;
+				for (Iterator<String> it = userList.iterator(); it.hasNext();){
+					String next = it.next();
+					response += next + ";";
+				}
+				System.out.println(response);
+				out.println(response);
+				
+				String mensagens = tokens.nextToken();
+
+				//criar metodo getMsgs
+				Vector<String> msgList = messages.getMsgs;
+				for(Iterator<String> it = msgList.iterator(); it.hasNext();){
+					String next = it.next();
+					response += next + "\n";
+				}
+				System.out.println(response);
+				out.println(response);
+
+			}else
+				out.println("Method not found.");
+
+			out.flush();
+			in.close();
+			out.close();
+			ligacao.close();
 			
 		} catch (IOException e) {
 			System.out.println("Erro na execucao do servidor: " + e);

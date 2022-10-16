@@ -2,12 +2,9 @@ import java.util.*;
 
 public class Messages {
 
-    public Vector<String> getMessages(String IPAdress){
-
-        long actualTime = new Date().getTime();
-        cont = cont+1;
-        
-    }
+    private static Hashtable<String, UserInfo> presentUsers = new Hashtable<String, UserInfo>();
+	private static int cont = 0;
+    
 
 }
 
