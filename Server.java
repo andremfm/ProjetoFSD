@@ -6,6 +6,7 @@ public class Server {
 	
 	public static void main(String[] args) throws Exception {
 		int port=DEFAULT_PORT;
+		Messages messages = new Messages();
 		
 		ServerSocket servidor = null;
 		
@@ -19,7 +20,7 @@ public class Server {
 				Socket ligacao = servidor.accept();
 
 
-				Thread atendedor = new Thread(ligacao);
+				Thread atendedor = new Thread(ligacao, messages);
 				atendedor.start();
 
 			} catch (IOException e) {
