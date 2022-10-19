@@ -41,9 +41,14 @@ public class Client {
 			
 			out.println(request);
 			
-			String msg;
+			String msg = "";
 			
-			msg = in.readLine();
+			while(msg != null) {
+				msg = in.readLine();
+				if(msg != null)
+					System.out.println(msg);
+					
+			}
 			
 			ligacao.close();
 			System.out.println("Terminou a ligacao!");
