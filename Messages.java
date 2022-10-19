@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Messages implements Serializable {
+public class Messages {
 
 	private static Hashtable<String, UserInfo> presentUsers = new Hashtable<String, UserInfo>();
 	private static int cont = 0;
@@ -37,7 +37,7 @@ public class Messages implements Serializable {
 		return result;
 	}
 
-	public Mensagens(ArrayList<String>ListaMensagens){
+	public Messages(ArrayList<String>ListaMensagens){
 		this.ListaMensagens=ListaMensagens;
 	}
 

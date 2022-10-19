@@ -20,7 +20,7 @@ public class Server {
 				Socket ligacao = servidor.accept();
 
 
-				Thread atendedor = new Thread(ligacao, messages);
+				Handler atendedor = new Handler(ligacao, messages);
 				atendedor.start();
 
 			} catch (IOException e) {

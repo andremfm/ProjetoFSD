@@ -2,13 +2,13 @@ import java.net.*;
 import java.io.*;
 import java.util.*;
 
-public class Thread extends Thread {
+public class Handler extends Thread {
 	Socket ligacao;
 	Messages messages;
 	BufferedReader in;
 	PrintWriter out;
 	
-	public GetPresencesRequestHandler(Socket ligacao, Messages messages) {
+	public Handler(Socket ligacao, Messages messages) {
 		this.ligacao = ligacao;
 		this.messages = messages;
 		
@@ -69,4 +69,5 @@ public class Thread extends Thread {
 			System.out.println("Erro na execucao do servidor: " + e);
 			System.exit(1);
 		}
+}
 }
