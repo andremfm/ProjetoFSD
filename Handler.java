@@ -49,7 +49,7 @@ public class Handler extends Thread {
 				String mensagens = tokens.nextToken();
 
 				//criar metodo getMsgs
-				Vector<String> msgList = messages.getMsgs;
+				ArrayList<String> msgList = messages.getMsgs;
 				for(Iterator<String> it = msgList.iterator(); it.hasNext();){
 					String next = it.next();
 					response += next + "\n";

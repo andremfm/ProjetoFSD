@@ -37,18 +37,16 @@ public class Messages {
 		return result;
 	}
 
-	public Messages(ArrayList<String>ListaMensagens){
+	/*public Messages(ArrayList<String>ListaMensagens){
 		this.ListaMensagens=ListaMensagens;
-	}
+	}*/
 
-    public ArrayList<String> getMsgs(){
+    public ArrayList<String> getMsgs(String mensagem){
+		ListaMensagens.add(mensagem);
         return ListaMensagens;
     }
 
-    public void addMsg (String mensagem) {
-        this.getMsgs().add(mensagem);
-		return getMsgs();
-    }
+    
 
 }
 
