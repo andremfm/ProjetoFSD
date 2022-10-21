@@ -42,8 +42,13 @@ public class Messages {
 	}*/
 
     public ArrayList<String> getMsgs(String mensagem){
-		ListaMensagens.add(mensagem);
-        return ListaMensagens;
+    	ArrayList<String> ultimas = new ArrayList <String>();
+		ListaMensagens.add(0, mensagem);
+		for (int i=0; i<10; i++) {
+			String a = ListaMensagens.get(i);
+			ultimas.add(i, a);
+		}
+        return ultimas;
     }
 
     
