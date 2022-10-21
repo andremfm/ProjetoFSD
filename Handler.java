@@ -38,7 +38,7 @@ public class Handler extends Thread {
 				String users = tokens.nextToken();
 
 				//Criar metodo getUsers
-				Vector<String> userList = messages.getUsers;
+				Vector<String> userList = messages.getUsers(users);
 				for (Iterator<String> it = userList.iterator(); it.hasNext();){
 					String next = it.next();
 					response += next + ";";
@@ -49,7 +49,7 @@ public class Handler extends Thread {
 				String mensagens = tokens.nextToken();
 
 				//criar metodo getMsgs
-				ArrayList<String> msgList = messages.getMsgs;
+				ArrayList<String> msgList = messages.getMsgs(mensagens);
 				for(Iterator<String> it = msgList.iterator(); it.hasNext();){
 					String next = it.next();
 					response += next + "\n";
@@ -65,7 +65,7 @@ public class Handler extends Thread {
 			out.close();
 			ligacao.close();
 			
-		} catch (IOException e) {
+		} catch (IOException e, NullPointerException) {
 			System.out.println("Erro na execucao do servidor: " + e);
 			System.exit(1);
 		}
