@@ -43,8 +43,6 @@ public class Handler extends Thread {
 					String next = it.next();
 					response += next + ";";
 				}
-				System.out.println(response);
-				out.println(response);
 				
 				String mensagens = tokens.nextToken();
 
@@ -52,7 +50,7 @@ public class Handler extends Thread {
 				ArrayList<String> msgList = messages.getMsgs(mensagens);
 				for(Iterator<String> it = msgList.iterator(); it.hasNext();){
 					String next = it.next();
-					response += next + "\n";
+					response += "\n" +  next;
 				}
 				System.out.println(response);
 				out.println(response);
