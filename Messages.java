@@ -47,6 +47,7 @@ public class Messages {
 
     public void addMsg (String mensagem) {
         this.getMsgs().add(mensagem);
+		return getMsgs();
     }
 
 }
