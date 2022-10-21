@@ -4,7 +4,7 @@ public class Messages {
 
 	private static Hashtable<String, UserInfo> presentUsers = new Hashtable<String, UserInfo>();
 	private static int cont = 0;
-    private ArrayList<String>ListaMensagens;
+    private ArrayList<String>ListaMensagens = new ArrayList<String>();
 
 	public Vector<String> getUsers(String Username) {
 		

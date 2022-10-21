@@ -65,7 +65,7 @@ public class Handler extends Thread {
 			out.close();
 			ligacao.close();
 			
-		} catch (IOException e, NullPointerException) {
+		} catch (IOException e) {
 			System.out.println("Erro na execucao do servidor: " + e);
 			System.exit(1);
 		}
