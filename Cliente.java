@@ -38,11 +38,11 @@ public class Cliente {
 
 		ligacao = new Socket(serverAddress, porto);
 
-		Scanner input = new Scanner(System.in);  // Create a Scanner object
+		Scanner input = new Scanner(System.in);  
     	System.out.println("Username: ");
 		String userName = input.nextLine();
 
-		Scanner input2 = new Scanner(System.in);  // Create a Scanner object
+		Scanner input2 = new Scanner(System.in);  
     	System.out.println("Mensagem: ");
 		String mensg = input2.nextLine();
 		
@@ -51,7 +51,7 @@ public class Cliente {
 			
 			PrintWriter out = new PrintWriter(ligacao.getOutputStream(), true);
 			
-			String request = "SESSION_UPDATE_REQUEST" + " " + userName + " " + mensg;
+			String request = "SESSION_UPDATE_REQUEST" + ";;" + userName + ";;" + mensg;
 			
 			out.println(request);
 			

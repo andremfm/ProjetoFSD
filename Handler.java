@@ -30,14 +30,13 @@ public class Handler extends Thread {
 			String msg = in.readLine();
 			System.out.println("Request=" + msg);
 
-			StringTokenizer tokens = new StringTokenizer(msg);
+			StringTokenizer tokens = new StringTokenizer(msg, ";;");
 			String metodo = tokens.nextToken();
 
 			if (metodo.equals("SESSION_UPDATE_REQUEST")) {
 				response = "SESSION_UPDATE\n";
 				String users = tokens.nextToken();
 
-				//Criar metodo getUsers
 				Vector<String> userList = messages.getUsers(users);
 				for (Iterator<String> it = userList.iterator(); it.hasNext();){
 					String next = it.next();
@@ -46,7 +45,6 @@ public class Handler extends Thread {
 				
 				String mensagens = tokens.nextToken();
 
-				//criar metodo getMsgs
 				ArrayList<String> msgList = messages.getMsgs(mensagens);
 				for(Iterator<String> it = msgList.iterator(); it.hasNext();){
 					String next = it.next();

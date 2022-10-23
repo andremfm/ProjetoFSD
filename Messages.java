@@ -37,10 +37,6 @@ public class Messages {
 		return result;
 	}
 
-	/*public Messages(ArrayList<String>ListaMensagens){
-		this.ListaMensagens=ListaMensagens;
-	}*/
-
     public ArrayList<String> getMsgs(String mensagem){
 		ArrayList<String> ultimas = new ArrayList<String>();
 		ListaMensagens.add(0, mensagem);
