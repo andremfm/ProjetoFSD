@@ -42,10 +42,10 @@ public class Messages {
 	}*/
 
     public ArrayList<String> getMsgs(String mensagem){
-		ArrayList<String>ultimas = new ArrayList<String>();
+		ArrayList<String> ultimas = new ArrayList<String>();
 		ListaMensagens.add(0, mensagem);
 
-		if(ListaMensagens.size()<11){
+		if(ListaMensagens.size()<=10){
 			return ListaMensagens;
 		}else{
 		for (int i=0; i<10; i++) {
