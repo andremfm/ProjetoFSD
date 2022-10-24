@@ -12,7 +12,7 @@ public class Server {
 		
 		servidor = new ServerSocket(port);
 		
-		System.out.println("Servidor a' espera de ligacoes no porto " + port);
+		System.out.println("Servidor a espera de ligacoes na porta " + port);
 		
 		while(true) {
 			try {

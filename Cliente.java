@@ -39,11 +39,11 @@ public class Cliente {
 		ligacao = new Socket(serverAddress, porto);
 
 		Scanner input = new Scanner(System.in);  
-    	System.out.println("Username: ");
+    	System.out.print("Username: ");
 		String userName = input.nextLine();
 
 		Scanner input2 = new Scanner(System.in);  
-    	System.out.println("Mensagem: ");
+    	System.out.print("Mensagem: ");
 		String mensg = input2.nextLine();
 		
 		try {
@@ -65,7 +65,7 @@ public class Cliente {
 			}
 			
 			ligacao.close();
-			System.out.println("Terminou a ligacao!");
+			System.out.println("\nTerminou a ligacao!");
 		} catch (IOException e) {
 			System.out.println("Erro ao comunicar com o servidor: "+e);
 			System.exit(1);

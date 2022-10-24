@@ -34,9 +34,9 @@ public class Handler extends Thread {
 			String metodo = tokens.nextToken();
 
 			if (metodo.equals("SESSION_UPDATE_REQUEST")) {
-				response = "SESSION_UPDATE\n";
+				response = "SESSION_UPDATE\n\n";
 				String users = tokens.nextToken();
-
+				response += "Utilizadores: ";
 				Vector<String> userList = messages.getUsers(users);
 				for (Iterator<String> it = userList.iterator(); it.hasNext();){
 					String next = it.next();
@@ -44,7 +44,7 @@ public class Handler extends Thread {
 				}
 				
 				String mensagens = tokens.nextToken();
-
+				response += "\n\nMensagens: ";
 				ArrayList<String> msgList = messages.getMsgs(mensagens);
 				for(Iterator<String> it = msgList.iterator(); it.hasNext();){
 					String next = it.next();
