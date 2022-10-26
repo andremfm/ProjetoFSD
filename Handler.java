@@ -43,9 +43,8 @@ public class Handler extends Thread {
 					response += next + ";";
 				}
 				
-				String mensagens = tokens.nextToken();
 				response += "\n\nMensagens: ";
-				ArrayList<String> msgList = messages.getMsgs(mensagens);
+				ArrayList<String> msgList = messages.getMsgs();
 				for(Iterator<String> it = msgList.iterator(); it.hasNext();){
 					String next = it.next();
 					response += "\n" +  next;
@@ -53,9 +52,19 @@ public class Handler extends Thread {
 				System.out.println(response);
 				out.println(response);
 
-			}else
-				out.println("Method not found.");
+				
 
+			}else if(metodo.equals("AGENT_POST")){
+				response ="AGENT_POST";
+				String mensagens = tokens.nextToken();
+				messages.addMsg(mensagens);
+				response += mensagens;
+				System.out.println(response);
+
+
+			}else{
+				out.println("Method not found.");
+			}
 			out.flush();
 			in.close();
 			out.close();

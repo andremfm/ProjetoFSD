@@ -37,9 +37,8 @@ public class Messages {
 		return result;
 	}
 
-    public ArrayList<String> getMsgs(String mensagem){
+    public ArrayList<String> getMsgs(){
 		ArrayList<String> ultimas = new ArrayList<String>();
-		ListaMensagens.add(0, mensagem);
 
 		if(ListaMensagens.size()<=10){
 			return ListaMensagens;
@@ -51,6 +50,10 @@ public class Messages {
         return ultimas;
 		}
     }
+
+	public void addMsg(String mensagem){
+		ListaMensagens.add(0, mensagem);
+	}
 
     
 
