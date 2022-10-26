@@ -22,13 +22,16 @@ public class Handler extends Thread {
 		
 	}
 	
-	public void run() {                
+	public void run() {   
+		String msg;
 		try {
 			System.out.println("Aceitou ligacao de cliente no endereco " + ligacao.getInetAddress() + " na porta " + ligacao.getPort());
-
+	
 			String response;
-			String msg = in.readLine();
+			msg = in.readLine();
 			System.out.println("Request=" + msg);
+			
+			messages.add("Ola");
 
 			StringTokenizer tokens = new StringTokenizer(msg, ";;");
 			String metodo = tokens.nextToken();
@@ -74,5 +77,5 @@ public class Handler extends Thread {
 			System.out.println("Erro na execucao do servidor: " + e);
 			System.exit(1);
 		}
-}
+	}
 }

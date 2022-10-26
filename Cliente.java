@@ -11,27 +11,6 @@ public class Cliente {
 		String servidor = DEFAULT_HOST;
 		int porto = DEFAULT_PORT;
 		int mnu;
-		
-		/*if (args.length != 1) {
-			System.out.println("Erro: use java presencesClient <ip>");
-			System.exit(-1);
-		}
-		
-		InetAddress serverAddress = null;
-		
-		try {
-			serverAddress = InetAddress.getByName(args[0}]);
-		} catch (UnknownHostException u) {
-			System.out.println ("Erro");
-		}
-		
-		Socket ligacao = null;
-		
-		try {
-			ligacao = new Socket (serverAddress, args[1]);
-		} catch (IOException e) {
-			System.out.println ("Erro");
-		}*/
 
 		InetAddress serverAddress = InetAddress.getByName(servidor);
 
@@ -61,6 +40,7 @@ public class Cliente {
 					System.out.println(msg);
 					
 			}
+			out.flush();
 			do{
 				Scanner menu = new Scanner(System.in);
 				System.out.print("1 - Enviar mensagem; 2 - Refresh; 0 - Fechar: ");
@@ -75,6 +55,7 @@ public class Cliente {
 					out.println(request1);
 					System.out.println(request1);
 					System.out.println("Mensagem enviada.");
+					out.flush();
 					break;
 					case 2:
 						String request2 = "SESSION_UPDATE_REQUEST" + ";;" + userName;
@@ -85,13 +66,14 @@ public class Cliente {
 							if(msg2 != null)
 								System.out.println(msg2);
 						}
+						out.flush();
 						break;
 					case 0:
+						out.flush();
 						break;
 					default: System.out.println("ERRO!!!");
 				}
 			}while(mnu != 0);
-
 			ligacao.close();
 			System.out.println("\nTerminou a ligacao!");
 		} catch (IOException e) {
