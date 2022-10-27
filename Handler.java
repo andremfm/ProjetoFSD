@@ -30,8 +30,6 @@ public class Handler extends Thread {
 			String response;
 			msg = in.readLine();
 			System.out.println("Request=" + msg);
-			
-			messages.add("Ola");
 
 			StringTokenizer tokens = new StringTokenizer(msg, ";;");
 			String metodo = tokens.nextToken();
