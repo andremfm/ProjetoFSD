@@ -42,6 +42,12 @@ public class Cliente {
 			}
 
 			do{
+				ligacao = new Socket(serverAddress, porto);
+
+				in = new BufferedReader(new InputStreamReader(ligacao.getInputStream()));
+			
+				out = new PrintWriter(ligacao.getOutputStream(), true);
+
 				Scanner menu = new Scanner(System.in);
 				System.out.print("1 - Enviar mensagem; 2 - Refresh; 0 - Fechar: ");
 				mnu = menu.nextInt();
@@ -54,7 +60,6 @@ public class Cliente {
 						String request1 = "AGENT_POST" + ";;" + mensg;
 						out.println(request1);
 						out.flush();
-						System.out.println(request1);
 						System.out.println("Mensagem enviada.");
 					break;
 					case 2:
@@ -71,10 +76,15 @@ public class Cliente {
 						}
 						break;
 					case 0:
+						in.close();
+						out.close();
+						ligacao.close();
 						break;
 					default: System.out.println("ERRO!!!");
 				}
 			}while(mnu != 0);
+			in.close();
+			out.close();
 			ligacao.close();
 			System.out.println("\nTerminou a ligacao!");
 		} catch (IOException e) {

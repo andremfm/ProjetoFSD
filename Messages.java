@@ -39,7 +39,7 @@ public class Messages {
 
     public ArrayList<String> getMsgs(){
 		ArrayList<String> ultimas = new ArrayList<String>();
-		ListaMensagens.add("Ola");
+
 		if(ListaMensagens.size()<=10){
 			return ListaMensagens;
 		}else{
