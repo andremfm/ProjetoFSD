@@ -12,26 +12,20 @@ public class Handler extends Thread {
 		this.ligacao = ligacao;
 		this.messages = messages;
 		
-		try {
-			this.in = new BufferedReader (new InputStreamReader(ligacao.getInputStream()));
-			this.out = new PrintWriter(ligacao.getOutputStream());
-		} catch(IOException e) {
-			System.out.println("Erro na execucao do servidor: " + e);
-			System.exit(1);
-		}
-		
 	}
 	
+	@Override
 	public void run() {   
 		String msg;
 		try {
+			in = new BufferedReader (new InputStreamReader(ligacao.getInputStream()));
+			out = new PrintWriter(ligacao.getOutputStream());
 			System.out.println("Aceitou ligacao de cliente no endereco " + ligacao.getInetAddress() + " na porta " + ligacao.getPort());
 	
 			String response;
 			msg = in.readLine();
 			System.out.println("Request=" + msg);
 			
-			messages.add("Ola");
 
 			StringTokenizer tokens = new StringTokenizer(msg, ";;");
 			String metodo = tokens.nextToken();
@@ -54,7 +48,7 @@ public class Handler extends Thread {
 				}
 				System.out.println(response);
 				out.println(response);
-
+				out.flush();
 				
 
 			}else if(metodo.equals("AGENT_POST")){
@@ -68,7 +62,7 @@ public class Handler extends Thread {
 			}else{
 				out.println("Method not found.");
 			}
-			out.flush();
+
 			in.close();
 			out.close();
 			ligacao.close();

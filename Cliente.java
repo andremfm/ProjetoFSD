@@ -31,7 +31,7 @@ public class Cliente {
 			String request = "SESSION_UPDATE_REQUEST" + ";;" + userName;
 			
 			out.println(request);
-			
+			out.flush();
 			String msg = "";
 			
 			while(msg != null) {
@@ -40,7 +40,7 @@ public class Cliente {
 					System.out.println(msg);
 					
 			}
-			out.flush();
+
 			do{
 				Scanner menu = new Scanner(System.in);
 				System.out.print("1 - Enviar mensagem; 2 - Refresh; 0 - Fechar: ");
@@ -48,28 +48,29 @@ public class Cliente {
 
 				switch (mnu){
 					case 1:
-					Scanner input2 = new Scanner(System.in);  
-    				System.out.print("Mensagem: ");
-					String mensg = input2.nextLine();
-					String request1 = "AGENT_POST" + ";;" + mensg;
-					out.println(request1);
-					System.out.println(request1);
-					System.out.println("Mensagem enviada.");
-					out.flush();
+						Scanner input2 = new Scanner(System.in);  
+    					System.out.print("Mensagem: ");
+						String mensg = input2.nextLine();
+						String request1 = "AGENT_POST" + ";;" + mensg;
+						out.println(request1);
+						out.flush();
+						System.out.println(request1);
+						System.out.println("Mensagem enviada.");
 					break;
 					case 2:
 						String request2 = "SESSION_UPDATE_REQUEST" + ";;" + userName;
 						out.println(request2);
+						out.flush();
+						System.out.println(request2);
 						String msg2 = "";
+
 						while(msg2 != null) {
 							msg2 = in.readLine();
 							if(msg2 != null)
 								System.out.println(msg2);
 						}
-						out.flush();
 						break;
 					case 0:
-						out.flush();
 						break;
 					default: System.out.println("ERRO!!!");
 				}
