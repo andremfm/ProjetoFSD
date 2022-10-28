@@ -36,7 +36,6 @@ public class Handler extends Thread {
 
 			StringTokenizer tokens = new StringTokenizer(msg, ";;");
 			String metodo = tokens.nextToken();
-			System.out.println("aqui2");
 			if (metodo.equals("SESSION_UPDATE_REQUEST")) {
 				response = "SESSION_UPDATE\n\n";
 				String users = tokens.nextToken();
@@ -58,7 +57,6 @@ public class Handler extends Thread {
 				System.out.println(response);
 				out.println(response);
 				out.flush();
-				System.out.println("aqui3");
 				
 
 			}else if(metodo.equals("AGENT_POST")){
@@ -72,7 +70,6 @@ public class Handler extends Thread {
 			}else{
 				out.println("Method not found.");
 			}
-			System.out.println("aqui");
 			}
 			/*out.flush();
 			in.close();

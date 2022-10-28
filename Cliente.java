@@ -59,15 +59,16 @@ public class Cliente {
 						String request2 = "SESSION_UPDATE_REQUEST" + ";;" + userName;
 						out.println(request2);
 						String msg2 = "";
-						while(msg2 != null) {
+						while(!msg2.equals("END_OF_MESSAGE")) {
 							msg2 = in.readLine();
-							if(msg2 != null)
+							if(!msg2.equals("END_OF_MESSAGE"))
 								System.out.println(msg2);
 						}
 						out.flush();
 						break;
 					case 0:
 						out.flush();
+						ligacao.close();
 						break;
 					default: System.out.println("ERRO!!!");
 				}
