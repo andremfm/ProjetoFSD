@@ -25,10 +25,11 @@ public class Handler extends Thread {
 	public void run() {   
 		String msg;
 		try {
+			
+			System.out.println("Aceitou ligacao de cliente no endereco " + ligacao.getInetAddress() + " na porta " + ligacao.getPort());
+
 			while (true)
 			{
-			System.out.println("Aceitou ligacao de cliente no endereco " + ligacao.getInetAddress() + " na porta " + ligacao.getPort());
-	
 			String response;
 			msg = in.readLine();
 			System.out.println("Request=" + msg);

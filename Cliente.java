@@ -34,20 +34,12 @@ public class Cliente {
 			
 			String msg = "";
 			
-			 while (true) {
-				 msg = in.readLine();
-				 if(msg != "END_OF_MESSAGE") {
+			 while(!msg.equals("END_OF_MESSAGE")){
+				msg = in.readLine();
+				if(!msg.equals("END_OF_MESSAGE"))
 					System.out.println(msg);
-					return true;
-				 } else {
-					 return false;
-				 }
-			 }
-				
-				/*if(msg !== "END_OF_MESSAGE")
-					System.out.println(msg);
-			}while(msg !== "END_OF_MESSAGE");*/
-			
+			}
+
 				do{
 				Scanner menu = new Scanner(System.in);
 				System.out.print("1 - Enviar mensagem; 2 - Refresh; 0 - Fechar: ");
