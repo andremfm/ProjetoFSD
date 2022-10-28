@@ -34,14 +34,21 @@ public class Cliente {
 			
 			String msg = "";
 			
-			while(msg != null) {
-				msg = in.readLine();
-				if(msg != null)
+			 while (true) {
+				 msg = in.readLine();
+				 if(msg != "END_OF_MESSAGE") {
 					System.out.println(msg);
-					
-			}
-			out.flush();
-			do{
+					return true;
+				 } else {
+					 return false;
+				 }
+			 }
+				
+				/*if(msg !== "END_OF_MESSAGE")
+					System.out.println(msg);
+			}while(msg !== "END_OF_MESSAGE");*/
+			
+				do{
 				Scanner menu = new Scanner(System.in);
 				System.out.print("1 - Enviar mensagem; 2 - Refresh; 0 - Fechar: ");
 				mnu = menu.nextInt();
@@ -53,7 +60,6 @@ public class Cliente {
 					String mensg = input2.nextLine();
 					String request1 = "AGENT_POST" + ";;" + mensg;
 					out.println(request1);
-					System.out.println(request1);
 					System.out.println("Mensagem enviada.");
 					out.flush();
 					break;

@@ -25,6 +25,8 @@ public class Handler extends Thread {
 	public void run() {   
 		String msg;
 		try {
+			while (true)
+			{
 			System.out.println("Aceitou ligacao de cliente no endereco " + ligacao.getInetAddress() + " na porta " + ligacao.getPort());
 	
 			String response;
@@ -33,7 +35,7 @@ public class Handler extends Thread {
 
 			StringTokenizer tokens = new StringTokenizer(msg, ";;");
 			String metodo = tokens.nextToken();
-
+			System.out.println("aqui2");
 			if (metodo.equals("SESSION_UPDATE_REQUEST")) {
 				response = "SESSION_UPDATE\n\n";
 				String users = tokens.nextToken();
@@ -50,9 +52,12 @@ public class Handler extends Thread {
 					String next = it.next();
 					response += "\n" +  next;
 				}
+				response += "\nEND_OF_MESSAGE";
+						
 				System.out.println(response);
 				out.println(response);
-
+				out.flush();
+				System.out.println("aqui3");
 				
 
 			}else if(metodo.equals("AGENT_POST")){
@@ -66,10 +71,12 @@ public class Handler extends Thread {
 			}else{
 				out.println("Method not found.");
 			}
-			out.flush();
+			System.out.println("aqui");
+			}
+			/*out.flush();
 			in.close();
 			out.close();
-			ligacao.close();
+			ligacao.close();*/
 			
 		} catch (IOException e) {
 			System.out.println("Erro na execucao do servidor: " + e);
