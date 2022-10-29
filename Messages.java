@@ -49,14 +49,10 @@ public class Messages {
 
 	public void addMsg(String mensagem){
 		ListaMensagens.add(0, mensagem);
-	}
-
-    
-
+	}    
 }
 
-class UserInfo {
-	
+class UserInfo {	
 	private String user;
 	private long lastSeen;
 

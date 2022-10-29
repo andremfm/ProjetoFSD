@@ -51,10 +51,10 @@ public class Cliente {
 
 				switch (mnu){
 					case 1:
-					Scanner input2 = new Scanner(System.in);  
+					Scanner inputNewMsg = new Scanner(System.in);  
     				System.out.print("Mensagem: ");
-					String mensg = input2.nextLine();
-					String request1 = "AGENT_POST" + ";;" + mensg;
+					String NewMsg = inputNewMsg.nextLine();
+					String request1 = "AGENT_POST" + ";;" + NewMsg;
 					out.println(request1);
 					System.out.println("\nMensagem enviada.\n");
 					out.flush();
@@ -65,11 +65,11 @@ public class Cliente {
 
 						System.out.println("----------------------------------------------------");
 
-						String msg2 = "";
-						while(!msg2.equals("END_OF_MESSAGE")) {
-							msg2 = in.readLine();
-							if(!msg2.equals("END_OF_MESSAGE"))
-								System.out.println(msg2);
+						String msgRefresh = "";
+						while(!msgRefresh.equals("END_OF_MESSAGE")) {
+							msgRefresh = in.readLine();
+							if(!msgRefresh.equals("END_OF_MESSAGE"))
+								System.out.println(msgRefresh);
 						}
 
 						System.out.println("----------------------------------------------------");

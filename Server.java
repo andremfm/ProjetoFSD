@@ -18,8 +18,6 @@ public class Server {
 			try {
 
 				Socket ligacao = servidor.accept();
-
-
 				Handler atendedor = new Handler(ligacao, messages);
 				atendedor.start();
 
@@ -27,9 +25,6 @@ public class Server {
 				System.out.println("Erro na execucao do servidor: "+e);
 				System.exit(1);
 			}
-		}
-
-		
+		}		
 	}
-	
 }

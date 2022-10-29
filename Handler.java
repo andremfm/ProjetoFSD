@@ -18,8 +18,7 @@ public class Handler extends Thread {
 		} catch(IOException e) {
 			System.out.println("Erro na execucao do servidor: " + e);
 			System.exit(1);
-		}
-		
+		}	
 	}
 	
 	public void run() {   
@@ -60,7 +59,7 @@ public class Handler extends Thread {
 				
 
 			}else if(metodo.equals("AGENT_POST")){
-				response ="AGENT_POST";
+				response ="AGENT_POST ";
 				String mensagens = tokens.nextToken();
 				messages.addMsg(mensagens);
 				response += mensagens;
