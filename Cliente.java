@@ -21,7 +21,7 @@ public class Cliente {
 		Scanner input = new Scanner(System.in);  
     	System.out.print("Username: ");
 		String userName = input.nextLine();
-
+		System.out.print("\n");
 		
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(ligacao.getInputStream()));
@@ -30,19 +30,23 @@ public class Cliente {
 			
 			String request = "SESSION_UPDATE_REQUEST" + ";;" + userName;
 			
+			System.out.println("----------------------------------------------------");
+
 			out.println(request);
 			
 			String msg = "";
 			
-			 while(!msg.equals("END_OF_MESSAGE")){
+			while(!msg.equals("END_OF_MESSAGE")){
 				msg = in.readLine();
 				if(!msg.equals("END_OF_MESSAGE"))
 					System.out.println(msg);
 			}
 
+			System.out.println("----------------------------------------------------");
+
 				do{
 				Scanner menu = new Scanner(System.in);
-				System.out.print("1 - Enviar mensagem; 2 - Refresh; 0 - Fechar: ");
+				System.out.print("\n1 - Enviar mensagem; 2 - Refresh; 0 - Fechar: ");
 				mnu = menu.nextInt();
 
 				switch (mnu){
@@ -52,22 +56,30 @@ public class Cliente {
 					String mensg = input2.nextLine();
 					String request1 = "AGENT_POST" + ";;" + mensg;
 					out.println(request1);
-					System.out.println("Mensagem enviada.");
+					System.out.println("\nMensagem enviada.\n");
 					out.flush();
 					break;
 					case 2:
 						String request2 = "SESSION_UPDATE_REQUEST" + ";;" + userName;
 						out.println(request2);
+
+						System.out.println("----------------------------------------------------");
+
 						String msg2 = "";
 						while(!msg2.equals("END_OF_MESSAGE")) {
 							msg2 = in.readLine();
 							if(!msg2.equals("END_OF_MESSAGE"))
 								System.out.println(msg2);
 						}
+
+						System.out.println("----------------------------------------------------");
+
 						out.flush();
 						break;
 					case 0:
 						out.flush();
+						in.close();
+						out.close();
 						ligacao.close();
 						break;
 					default: System.out.println("ERRO!!!");

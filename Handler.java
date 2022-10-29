@@ -26,7 +26,7 @@ public class Handler extends Thread {
 		String msg;
 		try {
 			
-			System.out.println("Aceitou ligacao de cliente no endereco " + ligacao.getInetAddress() + " na porta " + ligacao.getPort());
+			System.out.println("Aceitou ligacao de cliente no endereco " + ligacao.getInetAddress() + " na porta " + ligacao.getPort() + "\n");
 
 			while (true)
 			{
@@ -39,14 +39,14 @@ public class Handler extends Thread {
 			if (metodo.equals("SESSION_UPDATE_REQUEST")) {
 				response = "SESSION_UPDATE\n\n";
 				String users = tokens.nextToken();
-				response += "Utilizadores: ";
+				response += "UTILIZADORES: ";
 				Vector<String> userList = messages.getUsers(users);
 				for (Iterator<String> it = userList.iterator(); it.hasNext();){
 					String next = it.next();
-					response += next + ";";
+					response += next + "; ";
 				}
 				
-				response += "\n\nMensagens: ";
+				response += "\n\nMENSAGENS: ";
 				ArrayList<String> msgList = messages.getMsgs();
 				for(Iterator<String> it = msgList.iterator(); it.hasNext();){
 					String next = it.next();
@@ -71,10 +71,6 @@ public class Handler extends Thread {
 				out.println("Method not found.");
 			}
 			}
-			/*out.flush();
-			in.close();
-			out.close();
-			ligacao.close();*/
 			
 		} catch (IOException e) {
 			System.out.println("Erro na execucao do servidor: " + e);
