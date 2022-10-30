@@ -46,6 +46,8 @@ public class Cliente {
 
 				do{
 				Scanner menu = new Scanner(System.in);
+				System.out.print("\n****** MENU ******");
+				System.out.print("\nEscolha um numero:");
 				System.out.print("\n1 - Enviar mensagem; 2 - Refresh; 0 - Fechar: ");
 				mnu = menu.nextInt();
 
