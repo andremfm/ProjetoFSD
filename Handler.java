@@ -64,6 +64,8 @@ public class Handler extends Thread {
 				messages.addMsg(mensagens);
 				response += mensagens;
 				System.out.println(response);
+				out.println("Mensagem Enviada!");
+				out.flush();
 
 
 			}else{

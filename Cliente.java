@@ -33,6 +33,7 @@ public class Cliente {
 			System.out.println("----------------------------------------------------");
 
 			out.println(request);
+			out.flush();
 			
 			String msg = "";
 			
@@ -58,7 +59,8 @@ public class Cliente {
 					String NewMsg = inputNewMsg.nextLine();
 					String request1 = "AGENT_POST" + ";;" + NewMsg;
 					out.println(request1);
-					System.out.println("\nMensagem enviada.\n");
+					//System.out.println("\nMensagem enviada.\n");
+					System.out.println(in.readLine());
 					out.flush();
 					break;
 					case 2:
