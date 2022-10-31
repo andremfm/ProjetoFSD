@@ -22,6 +22,7 @@ public class Messages {
 		return getUsersList();
 	}
 	
+	//Obter users ativos
 	private Vector<String> getUsersList(){
 		Vector<String> result = new Vector<String>();
 		for (Enumeration<UserInfo> e = presentUsers.elements(); e.hasMoreElements(); ) {
@@ -32,7 +33,8 @@ public class Messages {
 		}
 		return result;
 	}
-
+	
+	//Lista das 10 ultimas mensagens
     public ArrayList<String> getMsgs(){
 		ArrayList<String> ultimas = new ArrayList<String>();
 
@@ -46,7 +48,8 @@ public class Messages {
         return ultimas;
 		}
     }
-
+    
+    //Adicionar mensagem AGENT_POST
 	public void addMsg(String mensagem){
 		ListaMensagens.add(0, mensagem);
 	}    
