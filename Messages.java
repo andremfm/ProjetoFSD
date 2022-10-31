@@ -26,7 +26,7 @@ public class Messages {
 		Vector<String> result = new Vector<String>();
 		for (Enumeration<UserInfo> e = presentUsers.elements(); e.hasMoreElements(); ) {
 			UserInfo element = e.nextElement();
-			if (!element.timeOutPassed(120*1000)) {
+			if (!element.timeOutPassed(180*1000)) {
 				result.add(element.getUser());
 			}
 		}
