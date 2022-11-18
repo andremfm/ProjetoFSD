@@ -22,6 +22,15 @@ public class Cliente {
     	System.out.print("Username: ");
 		String userName = input.nextLine();
 		System.out.print("\n");
+		System.out.println("Suporte RMI?(S/N): ");
+		String rmi = input.nextLine();
+		if (rmi == "S" || rmi == "s"){
+			System.out.println("IP: ");
+			String ip = input.nextLine();
+
+			MessagesServer ms = new MessagesServer();
+			ms.createMessages();
+		}
 		
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(ligacao.getInputStream()));

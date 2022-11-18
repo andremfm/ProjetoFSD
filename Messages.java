@@ -1,6 +1,8 @@
 import java.util.*;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
-public class Messages {
+public class Messages extends UnicastRemoteObject implements PrivateMessaging {
 
 	private static Hashtable<String, UserInfo> presentUsers = new Hashtable<String, UserInfo>();
     private ArrayList<String>ListaMensagens = new ArrayList<String>();
@@ -52,7 +54,12 @@ public class Messages {
     //Adicionar mensagem AGENT_POST
 	public void addMsg(String mensagem){
 		ListaMensagens.add(0, mensagem);
-	}    
+	}   
+
+	public String sendMessage(String name, String message) {
+		String msg = name + ": " + message;
+		return msg;
+	}
 }
 
 class UserInfo {	

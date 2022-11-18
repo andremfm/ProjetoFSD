@@ -31,6 +31,8 @@ public class Handler extends Thread {
 			{
 			String response;
 			msg = in.readLine();
+			if (msg == null)
+				break;
 			System.out.println("Request=" + msg);
 
 			StringTokenizer tokens = new StringTokenizer(msg, ";;");
