@@ -6,6 +6,10 @@ public class Messages extends UnicastRemoteObject implements PrivateMessaging {
 
 	private static Hashtable<String, UserInfo> presentUsers = new Hashtable<String, UserInfo>();
     private ArrayList<String>ListaMensagens = new ArrayList<String>();
+    
+    public Messages () throws RemoteException {
+    	super();
+    }
 
 	public Vector<String> getUsers(String Username) {
 		

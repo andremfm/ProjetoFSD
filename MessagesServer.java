@@ -4,7 +4,7 @@ import java.rmi.registry.LocateRegistry;
 
 public class MessagesServer {
 	
-	String SERVICE_NAME="/MessagesRemote";
+	String SERVICE_NAME="/PrivateMessaging";
 
 	private void bindRMI(Messages messages) throws RemoteException {
 		
