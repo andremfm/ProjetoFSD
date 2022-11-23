@@ -1,16 +1,18 @@
 import java.util.*;
 import java.net.*;
 import java.io.*;
+import java.rmi.registry.LocateRegistry;
 
 public class Cliente {
 	
 	static final int DEFAULT_PORT = 2000;
-	static final String DEFAULT_HOST="127.0.0.1"; 
+	static final String DEFAULT_HOST="127.0.0.1";
 	
 	public static void main(String[] args) throws Exception {
 		String servidor = DEFAULT_HOST;
 		int porto = DEFAULT_PORT;
 		int mnu;
+		String SERVICE_NAME="/PrivateMessaging";
 
 		InetAddress serverAddress = InetAddress.getByName(servidor);
 
@@ -24,13 +26,11 @@ public class Cliente {
 		System.out.print("\n");
 		System.out.println("Suporte RMI?(S/N): ");
 		String rmi = input.nextLine();
-		if (rmi == "S" || rmi == "s"){
 			System.out.println("IP: ");
 			String ip = input.nextLine();
 
 			MessagesServer ms = new MessagesServer();
 			ms.createMessages();
-		}
 		
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(ligacao.getInputStream()));
@@ -58,7 +58,7 @@ public class Cliente {
 				Scanner menu = new Scanner(System.in);
 				System.out.print("\n****** MENU ******");
 				System.out.print("\nEscolha um numero:");
-				System.out.print("\n1 - Enviar mensagem; 2 - Refresh; 0 - Fechar: ");
+				System.out.print("\n1 - Enviar mensagem; 2 - Refresh; 3 - Enviar Mensagem Privada; 0 - Fechar: ");
 				mnu = menu.nextInt();
 
 				switch (mnu){
@@ -89,6 +89,14 @@ public class Cliente {
 
 						out.flush();
 						break;
+					case 3:
+						System.out.println("IP de destino: ");
+						String ipdest = input.nextLine();
+						System.out.println("Mensagem: ");
+						String msgpriv = input.nextLine();
+						PrivateMessaging pm = (PrivateMessaging) LocateRegistry.getRegistry(ipdest).lookup(SERVICE_NAME);
+						String sendmsg = pm.sendMessage(userName, msgpriv);
+
 					case 0:
 						out.flush();
 						in.close();
