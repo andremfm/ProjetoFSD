@@ -6,6 +6,7 @@ public class Messages extends UnicastRemoteObject implements PrivateMessaging {
 
 	private static Hashtable<String, UserInfo> presentUsers = new Hashtable<String, UserInfo>();
     private ArrayList<String>ListaMensagens = new ArrayList<String>();
+	String msg;
     
     public Messages () throws RemoteException {
     	super();
@@ -61,7 +62,13 @@ public class Messages extends UnicastRemoteObject implements PrivateMessaging {
 	}   
 
 	public String sendMessage(String name, String message) throws RemoteException {
-		String msg = name + ": " + message;
+		msg = name + ": " + message;
+		return printMsg();
+
+	}
+
+	private String printMsg(){
+		System.out.println(msg);
 		return msg;
 	}
 }

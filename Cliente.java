@@ -26,11 +26,15 @@ public class Cliente {
 		System.out.print("\n");
 		System.out.println("Suporte RMI?(S/N): ");
 		String rmi = input.nextLine();
+		if(rmi.equals("S") || rmi.equals("s")){
 			System.out.println("IP: ");
 			String ip = input.nextLine();
+			System.out.println("Porta: ");
+			int porta = input.nextInt();
 
 			MessagesServer ms = new MessagesServer();
 			ms.createMessages();
+		}
 		
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(ligacao.getInputStream()));
@@ -95,7 +99,7 @@ public class Cliente {
 						System.out.println("Mensagem: ");
 						String msgpriv = input.nextLine();
 						PrivateMessaging pm = (PrivateMessaging) LocateRegistry.getRegistry(ipdest).lookup(SERVICE_NAME);
-						String sendmsg = pm.sendMessage(userName, msgpriv);
+						pm.sendMessage(userName, msgpriv);
 
 					case 0:
 						out.flush();
