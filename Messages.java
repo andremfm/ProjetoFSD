@@ -60,7 +60,7 @@ public class Messages extends UnicastRemoteObject implements PrivateMessaging {
 		ListaMensagens.add(0, mensagem);
 	}   
 
-	public String sendMessage(String name, String message) {
+	public String sendMessage(String name, String message) throws RemoteException {
 		String msg = name + ": " + message;
 		return msg;
 	}
