@@ -5,9 +5,10 @@ import java.rmi.registry.LocateRegistry;
 public class MessagesServer {
 	
 	String SERVICE_NAME="/PrivateMessaging";
+	int porta;
 
 	private void bindRMI(Messages messages) throws RemoteException {
-		
+
 		System.getProperties().put( "java.security.policy", "./server.policy");
 
 		if( System.getSecurityManager() == null) {
@@ -15,12 +16,12 @@ public class MessagesServer {
 		}
 
 		try { 
-			LocateRegistry.createRegistry(1099);
+			LocateRegistry.createRegistry(porta);
 		} catch( RemoteException e) {
 			
 		}
 		try {
-		  LocateRegistry.getRegistry("127.0.0.1",1099).rebind(SERVICE_NAME, messages);
+		  LocateRegistry.getRegistry(porta).rebind(SERVICE_NAME, messages);
 		  } catch( RemoteException e) {
 		  	System.out.println("Registry not found");
 		  }
@@ -30,7 +31,9 @@ public class MessagesServer {
 		super();
 	}
 	
-	public void createMessages() {
+	public void createMessages(int porta) {
+
+		this.porta = porta;
 		
 		Messages messages = null;
 		try {

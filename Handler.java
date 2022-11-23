@@ -44,7 +44,7 @@ public class Handler extends Thread {
 				Vector<String> userList = messages.getUsers(users);
 				for (Iterator<String> it = userList.iterator(); it.hasNext();){
 					String next = it.next();
-					response += next + "; ";
+					response +="\n" + next + "; ";
 				}
 				
 				response += "\n\nMENSAGENS: ";

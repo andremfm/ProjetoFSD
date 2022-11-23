@@ -13,6 +13,7 @@ public class Cliente {
 		int porto = DEFAULT_PORT;
 		int mnu;
 		String SERVICE_NAME="/PrivateMessaging";
+		int porta;
 
 		InetAddress serverAddress = InetAddress.getByName(servidor);
 
@@ -27,20 +28,20 @@ public class Cliente {
 		System.out.println("Suporte RMI?(S/N): ");
 		String rmi = input.nextLine();
 		if(rmi.equals("S") || rmi.equals("s")){
-			System.out.println("IP: ");
-			String ip = input.nextLine();
 			System.out.println("Porta: ");
-			int porta = input.nextInt();
+			porta = input.nextInt();
 
 			MessagesServer ms = new MessagesServer();
-			ms.createMessages();
+			ms.createMessages(porta);
+			userName = userName + "| RMI: " + rmi + "| Porta: " +  porta;
+		}else{
+			userName = userName + "| RMI: " + rmi;
 		}
 		
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(ligacao.getInputStream()));
 			
 			PrintWriter out = new PrintWriter(ligacao.getOutputStream(), true);
-			
 			String request = "SESSION_UPDATE_REQUEST" + ";;" + userName;
 			
 			System.out.println("----------------------------------------------------");
@@ -94,11 +95,12 @@ public class Cliente {
 						out.flush();
 						break;
 					case 3:
-						System.out.println("IP de destino: ");
-						String ipdest = input.nextLine();
+						System.out.println("Porta de destino: ");
+						int portadest = input.nextInt();
+						Scanner inputmsg = new Scanner(System.in);  
 						System.out.println("Mensagem: ");
-						String msgpriv = input.nextLine();
-						PrivateMessaging pm = (PrivateMessaging) LocateRegistry.getRegistry(ipdest).lookup(SERVICE_NAME);
+						String msgpriv = inputmsg.nextLine();
+						PrivateMessaging pm = (PrivateMessaging) LocateRegistry.getRegistry(portadest).lookup(SERVICE_NAME);
 						pm.sendMessage(userName, msgpriv);
 
 					case 0:
