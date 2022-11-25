@@ -62,15 +62,12 @@ public class Messages extends UnicastRemoteObject implements PrivateMessaging {
 	}   
 
 	public String sendMessage(String name, String message) throws RemoteException {
-		msg = "\n" + name + ": " + message;
-		return printMsg();
-
-	}
-
-	private String printMsg(){
+		msg = name + ": " + message;
 		System.out.println(msg);
 		return msg;
+
 	}
+
 }
 
 class UserInfo {	

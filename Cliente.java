@@ -14,6 +14,7 @@ public class Cliente {
 		int mnu;
 		String SERVICE_NAME="/PrivateMessaging";
 		int porta;
+		String username2;
 
 		InetAddress serverAddress = InetAddress.getByName(servidor);
 
@@ -33,16 +34,16 @@ public class Cliente {
 
 			MessagesServer ms = new MessagesServer();
 			ms.createMessages(porta);
-			userName = userName + "| RMI?: Sim" + "| Porta: " +  porta;
+			username2 = userName + " | RMI: Sim" + " | Porta: " +  porta;
 		}else{
-			userName = userName + "| RMI? Nao";
+			username2 = userName + " | RMI: Não";
 		}
 		
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(ligacao.getInputStream()));
 			
 			PrintWriter out = new PrintWriter(ligacao.getOutputStream(), true);
-			String request = "SESSION_UPDATE_REQUEST" + ";;" + userName;
+			String request = "SESSION_UPDATE_REQUEST" + ";;" + username2;
 			
 			System.out.println("----------------------------------------------------");
 
@@ -63,7 +64,7 @@ public class Cliente {
 				Scanner menu = new Scanner(System.in);
 				System.out.print("\n****** MENU ******");
 				System.out.print("\nEscolha um numero:");
-				System.out.print("\n1 - Enviar mensagem; 2 - Refresh; 3 - Enviar Mensagem Privada; 0 - Fechar: ");
+				System.out.print("\n1 - Enviar mensagem; 2 - Refresh; 3 - Enviar Mensagem Privada; 0 - Fechar: \n");
 				mnu = menu.nextInt();
 
 				switch (mnu){
@@ -78,7 +79,7 @@ public class Cliente {
 					out.flush();
 					break;
 					case 2:
-						String request2 = "SESSION_UPDATE_REQUEST" + ";;" + userName;
+						String request2 = "SESSION_UPDATE_REQUEST" + ";;" + username2;
 						out.println(request2);
 
 						System.out.println("----------------------------------------------------");
