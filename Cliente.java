@@ -32,9 +32,12 @@ public class Cliente {
 			System.out.println("Porta: ");
 			porta = input.nextInt();
 
+			String address = Inet4Address.getLocalHost().getHostAddress();
+
 			MessagesServer ms = new MessagesServer();
 			ms.createMessages(porta);
-			username2 = userName + " | RMI: Sim" + " | Porta: " +  porta;
+			username2 = userName + " | RMI: Sim" + " | IP: "+ address + " | Porta: " +  porta;
+			
 		}else{
 			username2 = userName + " | RMI: Não";
 		}
@@ -96,13 +99,17 @@ public class Cliente {
 						out.flush();
 						break;
 					case 3:
+						System.out.println("IP de destino: ");
+						String ipdest = input.nextLine();
 						System.out.println("Porta de destino: ");
 						int portadest = input.nextInt();
 						Scanner inputmsg = new Scanner(System.in);  
 						System.out.println("Mensagem: ");
 						String msgpriv = inputmsg.nextLine();
-						PrivateMessaging pm = (PrivateMessaging) LocateRegistry.getRegistry(portadest).lookup(SERVICE_NAME);
+						//try{
+						PrivateMessaging pm = (PrivateMessaging) LocateRegistry.getRegistry(ipdest, portadest).lookup(SERVICE_NAME);
 						pm.sendMessage(userName, msgpriv);
+						//}catch
 
 					case 0:
 						out.flush();
