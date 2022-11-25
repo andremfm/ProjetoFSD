@@ -33,9 +33,9 @@ public class Cliente {
 
 			MessagesServer ms = new MessagesServer();
 			ms.createMessages(porta);
-			userName = userName + "| RMI: " + rmi + "| Porta: " +  porta;
+			userName = userName + "| RMI?: Sim" + "| Porta: " +  porta;
 		}else{
-			userName = userName + "| RMI: " + rmi;
+			userName = userName + "| RMI? Nao";
 		}
 		
 		try {
