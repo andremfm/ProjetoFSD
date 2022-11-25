@@ -15,6 +15,7 @@ public class Cliente {
 		String SERVICE_NAME="/PrivateMessaging";
 		int porta;
 		String username2;
+		String ip;
 
 		InetAddress serverAddress = InetAddress.getByName(servidor);
 
@@ -29,14 +30,14 @@ public class Cliente {
 		System.out.println("Suporte RMI?(S/N): ");
 		String rmi = input.nextLine();
 		if(rmi.equals("S") || rmi.equals("s")){
+			System.out.println("IP: ");
+			ip = input.nextLine();
 			System.out.println("Porta: ");
 			porta = input.nextInt();
 
-			String address = Inet4Address.getLocalHost().getHostAddress();
-
 			MessagesServer ms = new MessagesServer();
 			ms.createMessages(porta);
-			username2 = userName + " | RMI: Sim" + " | IP: "+ address + " | Porta: " +  porta;
+			username2 = userName + " | RMI: Sim" + " | IP: "+ ip + " | Porta: " +  porta;
 			
 		}else{
 			username2 = userName + " | RMI: Não";
@@ -99,18 +100,19 @@ public class Cliente {
 						out.flush();
 						break;
 					case 3:
+						Scanner inputcase3 = new Scanner(System.in); 
 						System.out.println("IP de destino: ");
-						String ipdest = input.nextLine();
+						String ipdest = inputcase3.nextLine();
 						System.out.println("Porta de destino: ");
-						int portadest = input.nextInt();
-						Scanner inputmsg = new Scanner(System.in);  
+						int portadest = inputcase3.nextInt(); 
+						Scanner inputcase3msg = new Scanner(System.in);
 						System.out.println("Mensagem: ");
-						String msgpriv = inputmsg.nextLine();
+						String msgpriv = inputcase3msg.nextLine();
 						//try{
 						PrivateMessaging pm = (PrivateMessaging) LocateRegistry.getRegistry(ipdest, portadest).lookup(SERVICE_NAME);
 						pm.sendMessage(userName, msgpriv);
 						//}catch
-
+						break;
 					case 0:
 						out.flush();
 						in.close();
