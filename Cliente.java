@@ -17,7 +17,7 @@ public class Cliente {
 		String username2;
 		String ip;
 
-		InetAddress serverAddress = InetAddress.getByName(servidor);
+		InetAddress serverAddress = InetAddress.getByName(args[0]);
 
 		Socket ligacao = null;
 
