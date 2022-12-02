@@ -36,7 +36,7 @@ public class Cliente {
 			porta = input.nextInt();
 
 			MessagesServer ms = new MessagesServer();
-			ms.createMessages(porta);
+			ms.createMessages(porta, ip);
 			username2 = userName + " | RMI: Sim" + " | IP: "+ ip + " | Porta: " +  porta;
 			
 		}else{

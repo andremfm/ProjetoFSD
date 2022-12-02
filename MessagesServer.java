@@ -6,9 +6,11 @@ public class MessagesServer {
 	
 	String SERVICE_NAME="/PrivateMessaging";
 	int porta;
+	String ip;
 
 	private void bindRMI(Messages messages) throws RemoteException {
 
+		System.setProperty("java.rmi.server.hostname", ip);
 		System.getProperties().put( "java.security.policy", "./server.policy");
 
 		if( System.getSecurityManager() == null) {
@@ -31,9 +33,10 @@ public class MessagesServer {
 		super();
 	}
 	
-	public void createMessages(int porta) {
+	public void createMessages(int porta, String ip) {
 
 		this.porta = porta;
+		this.ip=ip;
 		
 		Messages messages = null;
 		try {
