@@ -17,6 +17,8 @@ public class Cliente {
 		int porta;
 		String username2;
 		String ip;
+		PrivateKey privKey;
+		PublicKey chavepub;
 
 		InetAddress serverAddress = InetAddress.getByName(args[0]);
 
@@ -46,10 +48,10 @@ public class Cliente {
 		      KeyPair pair = keyPairGen.generateKeyPair();
 		      
 		      //Getting the private key from the key pair
-		      PrivateKey privKey = pair.getPrivate();
+		      privKey = pair.getPrivate();
 		      
 		      //Get PublicKey
-		      PublicKey chavepub = pair.getPublic();
+		      chavepub = pair.getPublic();
 		      
 
 			MessagesServer ms = new MessagesServer();
@@ -131,12 +133,12 @@ public class Cliente {
 						//}catch
 						break;
 					case 4:
-						Scanner inputcase3 = new Scanner(System.in); 
+						Scanner inputcase4 = new Scanner(System.in); 
 						System.out.println("IP de destino: ");
-						String ipdest = inputcase3.nextLine();
+						String ipdest1 = inputcase3.nextLine();
 						System.out.println("Porta de destino: ");
-						int portadest = inputcase3.nextInt(); 
-						Scanner input = new Scanner(System.in);
+						int portadest1 = inputcase3.nextInt(); 
+						Scanner input1 = new Scanner(System.in);
 						System.out.println("Mensagem: ");
 						String msgass = input.nextLine();
 						
@@ -162,8 +164,8 @@ public class Cliente {
 					      //Calculating the signature
 					      byte[] signature = sign.sign();
 					      
-					      PrivateMessaging pm = (PrivateMessaging) LocateRegistry.getRegistry(ipdest, portadest).lookup(SERVICE_NAME);
-					      pm.sendMessageSecure(userName, msgass, signature, chavepub);
+					      PrivateMessaging pms = (PrivateMessaging) LocateRegistry.getRegistry(ipdest, portadest).lookup(SERVICE_NAME);
+					      pms.sendMessageSecure(userName, msgass, signature, chavepub);
 						
 						break;
 					case 0:
