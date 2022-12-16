@@ -69,7 +69,7 @@ public class Messages extends UnicastRemoteObject implements PrivateMessaging {
 
 	}
 	
-	public String sendMessageSecure (String name, String message, String signature) throws RemoteException {
+	public String sendMessageSecure (String name, String message, String signature, PublicKey chavepub) throws RemoteException {
 
 		//Creating the MessageDigest object  
 	      MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -94,8 +94,8 @@ public class Messages extends UnicastRemoteObject implements PrivateMessaging {
 	      byte[] signature = sign.sign(); 
 	      
 	    //Initializing the signature
-	      sign.initVerify();
-	      sign.update(bytes);
+	      sign.initVerify(chavepub);
+	      sign.update(digest);
 	      
 	      //Verifying the signature
 	      boolean bool = sign.verify(signature);

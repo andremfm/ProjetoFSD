@@ -163,7 +163,7 @@ public class Cliente {
 					      byte[] signature = sign.sign();
 					      
 					      PrivateMessaging pm = (PrivateMessaging) LocateRegistry.getRegistry(ipdest, portadest).lookup(SERVICE_NAME);
-					      pm.sendMessageSecure(userName, msgass, signature);
+					      pm.sendMessageSecure(userName, msgass, signature, chavepub);
 						
 						break;
 					case 0:
