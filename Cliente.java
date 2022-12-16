@@ -2,6 +2,7 @@ import java.util.*;
 import java.net.*;
 import java.io.*;
 import java.rmi.registry.LocateRegistry;
+import java.security.*;
 
 public class Cliente {
 	
@@ -34,10 +35,26 @@ public class Cliente {
 			ip = input.nextLine();
 			System.out.println("Porta: ");
 			porta = input.nextInt();
+			
+			//Creating KeyPair generator object
+		      KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("DSA");
+		      
+		      //Initializing the key pair generator
+		      keyPairGen.initialize(2048);
+		      
+		      //Generate the pair of keys
+		      KeyPair pair = keyPairGen.generateKeyPair();
+		      
+		      //Getting the private key from the key pair
+		      PrivateKey privKey = pair.getPrivate();
+		      
+		      //Get PublicKey
+		      PublicKey chavepub = pair.getPublic();
+		      
 
 			MessagesServer ms = new MessagesServer();
 			ms.createMessages(porta, ip);
-			username2 = userName + " | RMI: Sim" + " | IP: "+ ip + " | Porta: " +  porta;
+			username2 = userName + " | RMI: Sim" + " | IP: "+ ip + " | Porta: " +  porta + "| Chave Publica: " + chavepub;
 			
 		}else{
 			username2 = userName + " | RMI: Não";
@@ -68,7 +85,7 @@ public class Cliente {
 				Scanner menu = new Scanner(System.in);
 				System.out.print("\n****** MENU ******");
 				System.out.print("\nEscolha um numero:");
-				System.out.print("\n1 - Enviar mensagem; 2 - Refresh; 3 - Enviar Mensagem Privada; 0 - Fechar: \n");
+				System.out.print("\n1 - Enviar mensagem; 2 - Refresh; 3 - Enviar Mensagem Privada; 4 - Enviar Mensagem Assinada; 0 - Fechar: \n");
 				mnu = menu.nextInt();
 
 				switch (mnu){
@@ -112,6 +129,42 @@ public class Cliente {
 						PrivateMessaging pm = (PrivateMessaging) LocateRegistry.getRegistry(ipdest, portadest).lookup(SERVICE_NAME);
 						pm.sendMessage(userName, msgpriv);
 						//}catch
+						break;
+					case 4:
+						Scanner inputcase3 = new Scanner(System.in); 
+						System.out.println("IP de destino: ");
+						String ipdest = inputcase3.nextLine();
+						System.out.println("Porta de destino: ");
+						int portadest = inputcase3.nextInt(); 
+						Scanner input = new Scanner(System.in);
+						System.out.println("Mensagem: ");
+						String msgass = input.nextLine();
+						
+						//Creating the MessageDigest object  
+					      MessageDigest md = MessageDigest.getInstance("SHA-256");
+					      
+					    //Passing data to the created MessageDigest Object
+					      md.update(msgass.getBytes());
+					      
+					    //Compute the message digest
+					      byte[] digest = md.digest();
+					      
+					      //Creating a Signature object
+					      Signature sign = Signature.getInstance("SHA256withDSA");
+					      
+					      //Initialize the signature
+					      sign.initSign(privKey);
+					      byte[] bytes = "digest".getBytes();
+					      
+					      //Adding digest to the signature
+					      sign.update(bytes);
+					      
+					      //Calculating the signature
+					      byte[] signature = sign.sign();
+					      
+					      PrivateMessaging pm = (PrivateMessaging) LocateRegistry.getRegistry(ipdest, portadest).lookup(SERVICE_NAME);
+					      pm.sendMessageSecure(userName, msgass, signature);
+						
 						break;
 					case 0:
 						out.flush();
