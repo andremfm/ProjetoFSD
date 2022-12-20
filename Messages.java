@@ -70,8 +70,10 @@ public class Messages extends UnicastRemoteObject implements PrivateMessaging {
 	}
 	
 	public String sendMessageSecure (String name, String message, String signature, PublicKey chavepub) throws RemoteException {
+		
+		byte[] sig = Base64.getDecoder().decode(signature);
 
-		//Creating the MessageDigest object  
+		  //Creating the MessageDigest object  
 	      MessageDigest md = MessageDigest.getInstance("SHA-256");
 
 	      //Passing data to the created MessageDigest Object
@@ -80,31 +82,28 @@ public class Messages extends UnicastRemoteObject implements PrivateMessaging {
 	      //Compute the message digest
 	      byte[] digest = md.digest();   
 	      
-	    //Creating a Signature object
+	      //Creating a Signature object
 	      Signature sign = Signature.getInstance("SHA256withDSA");
 
-	      //Initializing the signature
-	      sign.initSign(privKey);
-	      byte[] bytes = "Hello how are you".getBytes();
+		  //Initialize the signature
+		  //sign.initSign(chavepub);
 	      
 	      //Adding data to the signature
-	      sign.update(digest);
+	      //sign.update(bytes);	      
 	      
-	      //Calculating the signature
-	      byte[] signature = sign.sign(); 
-	      
-	    //Initializing the signature
+	      //Initializing the signature
 	      sign.initVerify(chavepub);
 	      sign.update(digest);
 	      
 	      //Verifying the signature
-	      boolean bool = sign.verify(signature);
+	      boolean bool = sign.verify(sig);
 	      
 	      if(bool) {
-	         System.out.println("Signature verified");   
+	         System.out.println(message);   
 	      } else {
 	         System.out.println("Signature failed");
 	      }
+		  return message;
 	   }
 
 }

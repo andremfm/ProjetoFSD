@@ -32,28 +32,28 @@ public class Cliente {
 		System.out.print("\n");
 		System.out.println("Suporte RMI?(S/N): ");
 		String rmi = input.nextLine();
+
+		//Creating KeyPair generator object
+		KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("DSA");
+		      
+		//Initializing the key pair generator
+		keyPairGen.initialize(2048);
+		      
+		//Generate the pair of keys
+		KeyPair pair = keyPairGen.generateKeyPair();
+		      
+		//Getting the private key from the key pair
+		privKey = pair.getPrivate();
+		      
+		//Get PublicKey
+		chavepub = pair.getPublic();
+		      
+
 		if(rmi.equals("S") || rmi.equals("s")){
 			System.out.println("IP: ");
 			ip = input.nextLine();
 			System.out.println("Porta: ");
 			porta = input.nextInt();
-			
-			//Creating KeyPair generator object
-		      KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("DSA");
-		      
-		      //Initializing the key pair generator
-		      keyPairGen.initialize(2048);
-		      
-		      //Generate the pair of keys
-		      KeyPair pair = keyPairGen.generateKeyPair();
-		      
-		      //Getting the private key from the key pair
-		      privKey = pair.getPrivate();
-		      
-		      //Get PublicKey
-		      chavepub = pair.getPublic();
-		      
-
 			MessagesServer ms = new MessagesServer();
 			ms.createMessages(porta, ip);
 			username2 = userName + " | RMI: Sim" + " | IP: "+ ip + " | Porta: " +  porta + "| Chave Publica: " + chavepub;
@@ -135,9 +135,9 @@ public class Cliente {
 					case 4:
 						Scanner inputcase4 = new Scanner(System.in); 
 						System.out.println("IP de destino: ");
-						String ipdest1 = inputcase3.nextLine();
+						String ipdest1 = inputcase4.nextLine();
 						System.out.println("Porta de destino: ");
-						int portadest1 = inputcase3.nextInt(); 
+						int portadest1 = inputcase4.nextInt(); 
 						Scanner input1 = new Scanner(System.in);
 						System.out.println("Mensagem: ");
 						String msgass = input.nextLine();
@@ -163,9 +163,11 @@ public class Cliente {
 					      
 					      //Calculating the signature
 					      byte[] signature = sign.sign();
+
+						  String sig = Base64.getEncoder().encodeToString(signature);
 					      
-					      PrivateMessaging pms = (PrivateMessaging) LocateRegistry.getRegistry(ipdest, portadest).lookup(SERVICE_NAME);
-					      pms.sendMessageSecure(userName, msgass, signature, chavepub);
+					      PrivateMessaging pms = (PrivateMessaging) LocateRegistry.getRegistry(ipdest1, portadest1).lookup(SERVICE_NAME);
+					      pms.sendMessageSecure(userName, msgass, sig, chavepub);
 						
 						break;
 					case 0:
