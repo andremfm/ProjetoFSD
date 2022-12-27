@@ -10,6 +10,13 @@ public class Cliente {
 	static final String DEFAULT_HOST="127.0.0.1";
 	
 	public static void main(String[] args) throws Exception {
+
+		if(args.length != 1){
+			System.out.println("Tem de inserir: java Cliente <<Endereço do servidor>>");
+			System.exit(-1);
+		}
+
+
 		String servidor = DEFAULT_HOST;
 		int porto = DEFAULT_PORT;
 		int mnu;
