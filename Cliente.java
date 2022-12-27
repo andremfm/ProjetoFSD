@@ -47,6 +47,7 @@ public class Cliente {
 		      
 		//Get PublicKey
 		chavepub = pair.getPublic();
+		byte[] byteChavePub = chavepub.getEncoded();
 		      
 
 		if(rmi.equals("S") || rmi.equals("s")){
@@ -56,7 +57,7 @@ public class Cliente {
 			porta = input.nextInt();
 			MessagesServer ms = new MessagesServer();
 			ms.createMessages(porta, ip);
-			username2 = userName + " | RMI: Sim" + " | IP: "+ ip + " | Porta: " +  porta + "| Chave Publica: " + chavepub;
+			username2 = userName + " | RMI: Sim" + " | IP: "+ ip + " | Porta: " +  porta + "| Chave Publica: " + byteChavePub;
 			
 		}else{
 			username2 = userName + " | RMI: Não";
@@ -140,7 +141,7 @@ public class Cliente {
 						int portadest1 = inputcase4.nextInt(); 
 						Scanner input1 = new Scanner(System.in);
 						System.out.println("Mensagem: ");
-						String msgass = input.nextLine();
+						String msgass = input1.nextLine();
 						
 						//Creating the MessageDigest object  
 					      MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -156,10 +157,10 @@ public class Cliente {
 					      
 					      //Initialize the signature
 					      sign.initSign(privKey);
-					      byte[] bytes = "digest".getBytes();
+					      //byte[] bytes = digest.getBytes();
 					      
 					      //Adding digest to the signature
-					      sign.update(bytes);
+					      sign.update(digest);
 					      
 					      //Calculating the signature
 					      byte[] signature = sign.sign();

@@ -3,7 +3,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.security.*;
 
-public class Messages extends UnicastRemoteObject implements PrivateMessaging {
+public class Messages extends UnicastRemoteObject implements PrivateMessaging{
 
 	private static Hashtable<String, UserInfo> presentUsers = new Hashtable<String, UserInfo>();
     private ArrayList<String>ListaMensagens = new ArrayList<String>();
@@ -73,6 +73,7 @@ public class Messages extends UnicastRemoteObject implements PrivateMessaging {
 		
 		byte[] sig = Base64.getDecoder().decode(signature);
 
+		  try{
 		  //Creating the MessageDigest object  
 	      MessageDigest md = MessageDigest.getInstance("SHA-256");
 
@@ -99,13 +100,15 @@ public class Messages extends UnicastRemoteObject implements PrivateMessaging {
 	      boolean bool = sign.verify(sig);
 	      
 	      if(bool) {
-	         System.out.println(message);   
+	         System.out.println(message + " *Mensagem Verificada*");   
 	      } else {
-	         System.out.println("Signature failed");
+	         System.out.println(message + " *Mensagem Não Verificada*");
 	      }
-		  return message;
+		   }catch(NoSuchAlgorithmException | InvalidKeyException | SignatureException e){
+			System.exit(1);
+		  }
+		  		  return message;
 	   }
-
 }
 
 class UserInfo {	
