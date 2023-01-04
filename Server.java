@@ -9,18 +9,15 @@ public class Server {
 		Messages messages = new Messages();
 		
 		ServerSocket servidor = null;
-		
 		servidor = new ServerSocket(port);
 		
 		System.out.println("Servidor a espera de ligacoes na porta " + port);
 		
 		while(true) {
 			try {
-
 				Socket ligacao = servidor.accept();
 				Handler atendedor = new Handler(ligacao, messages);
 				atendedor.start();
-
 			} catch (IOException e) {
 				System.out.println("Erro na execucao do servidor: "+e);
 				System.exit(1);

@@ -61,14 +61,14 @@ public class Messages extends UnicastRemoteObject implements PrivateMessaging{
 	public void addMsg(String mensagem){
 		ListaMensagens.add(0, mensagem);
 	}   
-
+	//ENVIAR MENSAGEM DIRETA RMI
 	public String sendMessage(String name, String message) throws RemoteException {
 		msg = name + ": " + message;
 		System.out.println(msg);
 		return msg;
 
 	}
-	
+	//ENVIAR MENSAGEM DIRETA ASSINADA
 	public String sendMessageSecure (String name, String message, String signature, PublicKey chavepub) throws RemoteException {
 		
 		byte[] sig = Base64.getDecoder().decode(signature);
@@ -85,12 +85,6 @@ public class Messages extends UnicastRemoteObject implements PrivateMessaging{
 	      
 	      //Creating a Signature object
 	      Signature sign = Signature.getInstance("SHA256withDSA");
-
-		  //Initialize the signature
-		  //sign.initSign(chavepub);
-	      
-	      //Adding data to the signature
-	      //sign.update(bytes);	      
 	      
 	      //Initializing the signature
 	      sign.initVerify(chavepub);

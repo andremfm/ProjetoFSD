@@ -10,7 +10,7 @@ public class Cliente {
 	static final String DEFAULT_HOST="127.0.0.1";
 	
 	public static void main(String[] args) throws Exception {
-
+		//Verificar se insere os argumentos necessários
 		if(args.length != 1){
 			System.out.println("Tem de inserir: java Cliente <<Endereço do servidor>>");
 			System.exit(-1);
@@ -30,7 +30,6 @@ public class Cliente {
 		InetAddress serverAddress = InetAddress.getByName(args[0]);
 
 		Socket ligacao = null;
-
 		ligacao = new Socket(serverAddress, porto);
 
 		Scanner input = new Scanner(System.in);  
@@ -56,7 +55,7 @@ public class Cliente {
 		chavepub = pair.getPublic();
 		byte[] byteChavePub = chavepub.getEncoded();
 		      
-
+		//Veridicar se o Cliente suporta RMI
 		if(rmi.equals("S") || rmi.equals("s")){
 			System.out.println("IP: ");
 			ip = input.nextLine();
@@ -90,25 +89,26 @@ public class Cliente {
 			}
 
 			System.out.println("----------------------------------------------------");
-
+				//Criar menu com as várias opções
 				do{
 				Scanner menu = new Scanner(System.in);
 				System.out.print("\n****** MENU ******");
 				System.out.print("\nEscolha um numero:");
 				System.out.print("\n1 - Enviar mensagem; 2 - Refresh; 3 - Enviar Mensagem Privada; 4 - Enviar Mensagem Assinada; 0 - Fechar: \n");
 				mnu = menu.nextInt();
-
+				
 				switch (mnu){
+					//AGENT POST
 					case 1:
-					Scanner inputNewMsg = new Scanner(System.in);  
-    				System.out.print("Mensagem: ");
-					String NewMsg = inputNewMsg.nextLine();
-					String request1 = "AGENT_POST" + ";;" + NewMsg;
-					out.println(request1);
-					//System.out.println("\nMensagem enviada.\n");
-					System.out.println(in.readLine());
-					out.flush();
-					break;
+						Scanner inputNewMsg = new Scanner(System.in);  
+						System.out.print("Mensagem: ");
+						String NewMsg = inputNewMsg.nextLine();
+						String request1 = "AGENT_POST" + ";;" + NewMsg;
+						out.println(request1);
+						System.out.println(in.readLine());
+						out.flush();
+						break;
+					//SESSION UPDATE REQUEST
 					case 2:
 						String request2 = "SESSION_UPDATE_REQUEST" + ";;" + username2;
 						out.println(request2);
@@ -126,6 +126,7 @@ public class Cliente {
 
 						out.flush();
 						break;
+					//MENSAGEM PRIVADA RMI	
 					case 3:
 						Scanner inputcase3 = new Scanner(System.in); 
 						System.out.println("IP de destino: ");
@@ -135,11 +136,10 @@ public class Cliente {
 						Scanner inputcase3msg = new Scanner(System.in);
 						System.out.println("Mensagem: ");
 						String msgpriv = inputcase3msg.nextLine();
-						//try{
 						PrivateMessaging pm = (PrivateMessaging) LocateRegistry.getRegistry(ipdest, portadest).lookup(SERVICE_NAME);
 						pm.sendMessage(userName, msgpriv);
-						//}catch
 						break;
+					//MENSAGEM PRIVADA RMI ASSINADA
 					case 4:
 						Scanner inputcase4 = new Scanner(System.in); 
 						System.out.println("IP de destino: ");
@@ -151,33 +151,33 @@ public class Cliente {
 						String msgass = input1.nextLine();
 						
 						//Creating the MessageDigest object  
-					      MessageDigest md = MessageDigest.getInstance("SHA-256");
+					    MessageDigest md = MessageDigest.getInstance("SHA-256");
 					      
 					    //Passing data to the created MessageDigest Object
-					      md.update(msgass.getBytes());
+					    md.update(msgass.getBytes());
 					      
 					    //Compute the message digest
-					      byte[] digest = md.digest();
+					    byte[] digest = md.digest();
 					      
-					      //Creating a Signature object
-					      Signature sign = Signature.getInstance("SHA256withDSA");
+					    //Creating a Signature object
+					    Signature sign = Signature.getInstance("SHA256withDSA");
 					      
-					      //Initialize the signature
-					      sign.initSign(privKey);
-					      //byte[] bytes = digest.getBytes();
+					    //Initialize the signature
+					    sign.initSign(privKey);
 					      
-					      //Adding digest to the signature
-					      sign.update(digest);
+					    //Adding digest to the signature
+					    sign.update(digest);
 					      
-					      //Calculating the signature
-					      byte[] signature = sign.sign();
+					    //Calculating the signature
+					    byte[] signature = sign.sign();
 
-						  String sig = Base64.getEncoder().encodeToString(signature);
+						String sig = Base64.getEncoder().encodeToString(signature);
 					      
-					      PrivateMessaging pms = (PrivateMessaging) LocateRegistry.getRegistry(ipdest1, portadest1).lookup(SERVICE_NAME);
-					      pms.sendMessageSecure(userName, msgass, sig, chavepub);
+					    PrivateMessaging pms = (PrivateMessaging) LocateRegistry.getRegistry(ipdest1, portadest1).lookup(SERVICE_NAME);
+					    pms.sendMessageSecure(userName, msgass, sig, chavepub);
 						
 						break;
+					//FECHAR SISTEMA
 					case 0:
 						out.flush();
 						in.close();
