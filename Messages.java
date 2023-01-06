@@ -93,10 +93,12 @@ public class Messages extends UnicastRemoteObject implements PrivateMessaging{
 	      //Verifying the signature
 	      boolean bool = sign.verify(sig);
 	      
+	      String msgass = name + ": " +message;
 	      if(bool) {
-	         System.out.println(message + " *Mensagem Verificada*");   
+	    	  
+	         System.out.println(msgass + " *Mensagem Verificada*");   
 	      } else {
-	         System.out.println(message + " *Mensagem Não Verificada*");
+	         System.out.println(msgass + " *Mensagem Não Verificada*");
 	      }
 		   }catch(NoSuchAlgorithmException | InvalidKeyException | SignatureException e){
 			System.exit(1);
